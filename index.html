@@ -1,0 +1,88 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cats</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="CatApp">
+      <div class="popup_wrap" 
+        :class={popup_show:popUp}
+        >
+        <div class="popup_shadow" v-on:click="popUp=false"></div>
+        <div class="popup">
+          <div class="popup_text">{{popUpText}}</div>
+          <div class="popup_button" v-on:click="popUp=false">ОК</div>
+        </div>
+      </div>
+      <div class="on_top" 
+        v-on:click='onTop'
+        v-scroll="handleScroll"></div>
+      <header class="header">
+        <div class="section_wrap">
+          <div class="header__cont">
+            <a  href="javascript:void(0);" class="logo"></a>
+            <div class="menu">
+              <a  href="javascript:void(0);" class="menu_link">Main</a>
+              <a  href="javascript:void(0);" class="menu_link">Gallery</a>
+              <a  href="javascript:void(0);" class="menu_link">News</a>
+              <a  href="javascript:void(0);" class="menu_link">Profile</a>
+            </div>
+            <div class="tel_block">
+              <a href="tel:+544349000000" class="tel_block__link">+544 3490 00000</a>
+              <p class="tel_block__subtext">Звони скорее!</p>
+            </div>
+          </div>
+          <div class="header__title">Найдено 349 котов</div>
+        </div>
+      </header>
+      <section class="main">
+        <div class="section_wrap">
+          <div class="filter">
+            <div class="filter__title">Сортировать по:</div>
+            <div class="filter__button" 
+              @click="filter_price"
+              :class=filterPriceClass
+              >Цене</div>
+            <div class="filter__button" 
+              @click="filter_age"
+              :class=filterAgeClass
+              >Возрасту</div>
+          </div>
+          <div class="elments" >
+            <el 
+              v-for="(el, index) in data" 
+              :cat="el" 
+              :key='index' 
+              v-on:like="like(index)"
+              v-on:buy="buy(index)"        
+              ></el>
+          </div>
+          <button class="show_more" >Показать еще 20</button>
+        </div>
+      </section>
+      <footer class="footer">
+        <!-- <form action=""> -->
+        <div class="footer__cont">
+          <p class="title">Успей купить!</p>
+          <button type="submit" class="subscribe" v-on:click='subscribe'>Подписаться</button>
+          <input type="email" class="email" placeholder="Email" v-model='email'>
+        </div>
+        <p class="subtext">Подпишись и успей словить все акции</p>
+        <label for="subscribe_checkbox"  class="label_checkbox" id="subscribe_checkbox">
+        <input type="checkbox" class="checkbox"  id="subscribe_checkbox"  checked="checked">
+        <span class="checkmark"></span>
+        Подписаться на новости</label>
+        <!-- </form> -->
+      </footer>
+    </div>
+  </body>
+  <script src="js/vue.min.js"></script>
+  <script src="js/animatedScrollTo.js"></script>
+  <script src="js/script.js"></script>
+</html>
+
